@@ -1,4 +1,4 @@
-# use us-east-1 region, cluster config is hardcoded for it
+###### use us-east-1 region, cluster config is hardcoded for it
 region = us-east-1
 # This uses the current aws config profile (or $AWS_PROFILE)
 aws := aws --region $(region)
