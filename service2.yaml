@@ -1,13 +1,35 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: alpine
+  name: alpine-env
 spec:
   containers:
   - name: alpine
     image: alpine
+    command: ["sleep", "3000"]
     env:
     - name: user
-      value: "root"
+      valueFrom:
+        secretKeyRef:
+          name: credentials
+          key: user_name
     - name: password
-      value: "12345"
+      valueFrom:
+        secretKeyRef:
+          name: credentials
+          key: login_password
+    - name: database_add
+      valueFrom:
+        secretKeyRef:
+          name: credentials
+          key: database_add
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: credentials
+data:
+  user_name: "cm9vdCBhZG1pbgo="
+  login_password: "MTIzNDUK"
+  database_add: "bXlzcWxfc3ZjLmRldi5zdmMK"
